@@ -31,7 +31,7 @@ le.fit(y)
 y = le.transform(y)
 
 x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.33, random_state=42)
+    x, y, test_size=0.50, random_state=42)
 # x_train: the feature matrix for the training set
 # x_test: the feature matrix for the test set
 # y_train: the target variable vector for the training set
@@ -125,9 +125,9 @@ def getpreventionDict():
 
 def getInfo():
     print("-----------------------------------HealthBot-----------------------------------")
-    print("\nYour Name? \t\t\t\t", end="->")
+    print("\nGreetings!!! What is your name? \t\t\t\t", end="->")
     name = input("")
-    print("Hello,", name)
+    print("Hello", name, ". I am a Healthbot")
 
 
 def check_pattern(dis_list, inp):
@@ -154,7 +154,7 @@ def sec_predict(symptoms_exp):
     X = df.iloc[:, :-1]
     y = df['diagnosis']
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.3, random_state=20)
+        X, y, test_size=0.50, random_state=40)
     rf_clf = DecisionTreeClassifier()
     rf_clf.fit(X_train, y_train)
 
@@ -188,9 +188,9 @@ def tree_to_code(tree, feature_names):
     symptoms_present = []
 
     while True:
-        print("\nEnter the symptom you are experiencing \t\t", end="->")
-        disease_input = input("")
-        conf, cnf_dis = check_pattern(chk_dis, disease_input)
+        print("\nName one symptom you are experiencing \t\t", end="->")
+        symptom_input = input("")
+        conf, cnf_dis = check_pattern(chk_dis, symptom_input)
         if conf == 1:
             print("searches related to input: ")
             for num, it in enumerate(cnf_dis):
@@ -201,21 +201,21 @@ def tree_to_code(tree, feature_names):
             else:
                 conf_inp = 0
 
-            disease_input = cnf_dis[conf_inp]
+            symptom_input = cnf_dis[conf_inp]
             break
             print("Did you mean: ", cnf_dis, "?(yes/no) :", end="")
             conf_inp = input("")
             if(conf_inp == "yes"):
                 break
         else:
-            print("Enter valid symptom.")
+            print("Please enter a valid symptom. If you are seeing this message repeatedly it means I have not been trained on the symptoms you're giving and I aplogize for any inconvenience")
 
     while True:
         try:
-            num_days = int(input("Okay. From how many days ? : "))
+            num_days = int(input("Okay. For how many days ? : "))
             break
         except:
-            print("Enter valid input.")
+            print("Intger values only please.")
 
     def recurse(node, depth):
         indent = "  " * depth
@@ -223,7 +223,7 @@ def tree_to_code(tree, feature_names):
             name = feature_name[node]
             threshold = tree_.threshold[node]
 
-            if name == disease_input:
+            if name == symptom_input:
                 val = 1
             else:
                 val = 0
@@ -252,7 +252,8 @@ def tree_to_code(tree, feature_names):
                     if(inp == "yes" or inp == "no"):
                         break
                     else:
-                        print("provide proper answers i.e. (yes/no) : ", end="")
+                        print(
+                            "Please provide proper answers i.e. (yes/no) : ", end="")
                 if(inp == "yes"):
                     symptoms_exp.append(syms)
 

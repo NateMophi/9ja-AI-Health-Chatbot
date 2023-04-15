@@ -1,5 +1,6 @@
+import healthbot
 from tkinter import *
-from healthbot import getSeverityDict, getDescription, getpreventionDict, getInfo
+# from healthbot import getSeverityDict, getDescription, getpreventionDict, getInfo
 
 BG_GRAY = "#ABB2B9"
 BG_COLOR = "#17202A"
