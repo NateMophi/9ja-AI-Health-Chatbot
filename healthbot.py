@@ -188,7 +188,7 @@ def tree_to_code(tree, feature_names):
     symptoms_present = []
 
     while True:
-        print("\nName one symptom you are experiencing \t\t", end="->")
+        print("\nName where you are experiencing symptoms \t\t", end="->")
         symptom_input = input("")
         conf, cnf_dis = check_pattern(chk_dis, symptom_input)
         if conf == 1:
